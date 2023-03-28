@@ -8,14 +8,14 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto';
-
+import { Tokens } from './types';
 
 @Controller('auth')
 export class AuthController {
     constructor(private AuthService: AuthService) { }
 
     @Post('/local/signup')
-    signupLocal(@Body() dto: AuthDto) {
+    signupLocal(@Body() dto: AuthDto): Promise<Tokens> {
         return this.AuthService.signupLocal(dto);
     }
     @Post('/local/signin')
@@ -32,5 +32,4 @@ export class AuthController {
     refreshTokens() {
         return this.AuthService.refreshTokens();
     }
-
 }
