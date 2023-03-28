@@ -5,7 +5,9 @@ import {
     HttpStatus,
     Post,
     UseGuards,
-} from '@nestjs/common'; import { AuthService } from './auth.service';
+} from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { AuthDto } from './dto';
 
 
 @Controller('auth')
@@ -14,7 +16,7 @@ export class AuthController {
 
     @Post('/local/signup')
     signupLocal(@Body() dto: AuthDto) {
-        return this.AuthService.signUpLocal(dto);
+        return this.AuthService.signupLocal(dto);
     }
     @Post('/local/signin')
     signinLocal() {

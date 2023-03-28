@@ -8,15 +8,15 @@ export class AuthService {
     hashData(data: string) {
         return bcrypt.hash(data, 10);
     }
-    signupLocal(dto: AuthDto) {
-        const newUser = this.prisma.user.create({
+    async signupLocal(dto: AuthDto) {
+        const hash = await this.hashData(dto.password);
+        const newUser = await this.prisma.user.create({
             data: {
                 email: dto.email,
                 hash,
             },
         });
-
-    },
+    }
     signinLocal() { }
     logout() { }
     refreshTokens() { }
